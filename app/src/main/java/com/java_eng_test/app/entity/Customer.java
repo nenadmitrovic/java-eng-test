@@ -1,57 +1,52 @@
 package com.java_eng_test.app.entity;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity(name = "User")
-@Table(name="users")
-public class User {
+@Entity
+@Table(name="customers")
+public class Customer {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private int id;
+	
 	@Column(name = "name")
 	private String name;
-	@Column(name = "email")
+	
+	@Column(name = "name", insertable = false, updatable = false)
 	private String email;
+	
+	@Column(name = "address")
+	private String address;
+	
 	@Column(name = "date_created")
 	private Timestamp date;
 	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="user_id")
-	private List<Account> accounts;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="account_id")
+	private Account account;
 	
-
-	public User() {
+	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String name, String email, Timestamp date, List<Account> accounts) {
+	public Customer(String name, String email, String address, Timestamp date, Account account) {
 		this.name = name;
 		this.email = email;
+		this.address = address;
 		this.date = date;
-		this.accounts = accounts;
-	}
-
-
-
-	public List<Account> getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
+		this.account = account;
 	}
 
 	public String getName() {
@@ -70,6 +65,14 @@ public class User {
 		this.email = email;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public Timestamp getDate() {
 		return date;
 	}
@@ -78,7 +81,13 @@ public class User {
 		this.date = date;
 	}
 
+	public Account getAccount() {
+		return account;
+	}
 
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 	
 	@Override
 	public String toString() {
@@ -88,7 +97,6 @@ public class User {
 	
 	
 	
-
 	
 	
 	

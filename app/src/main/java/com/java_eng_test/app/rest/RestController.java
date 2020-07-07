@@ -5,24 +5,34 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.java_eng_test.app.dao.AccountDAO;
 import com.java_eng_test.app.dao.UserDAO;
+import com.java_eng_test.app.entity.Account;
 import com.java_eng_test.app.entity.User;
 
-@RestController
+
+@org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
-public class UserRestController {
+public class RestController {
 	
 	private UserDAO userDAO;
+	private AccountDAO accountDAO;
+	
 	@Autowired
-	public UserRestController(UserDAO theUserDAO) {
+	public RestController(UserDAO theUserDAO, AccountDAO theAccountDAO) {
 		userDAO = theUserDAO;
+		accountDAO = theAccountDAO;
 	}
 	
 	@GetMapping("/users")
 	public List<User> getUsers() {
 		return userDAO.findAll();
+	}
+	
+	@GetMapping("/accounts")
+	public List<Account> getAccounts() {
+		return accountDAO.findAll();
 	}
 	
 	
