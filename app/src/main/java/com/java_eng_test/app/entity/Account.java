@@ -1,7 +1,6 @@
 package com.java_eng_test.app.entity;
 
 import java.sql.Timestamp;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,15 +29,16 @@ public class Account {
 	
 	@JoinColumn(name="user_id")
 	private User user;
-
+	
 	
 	public Account() {
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public Account(Timestamp date) {
+	public Account(Timestamp date, User user) {
 		this.date = date;
+		this.user = user;
 	}
 
 
@@ -46,8 +46,19 @@ public class Account {
 		return date;
 	}
 
+
 	public void setDate(Timestamp date) {
 		this.date = date;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	
@@ -57,6 +68,8 @@ public class Account {
 		return super.toString();
 	}
 	
+	
+
 	
 
 	
